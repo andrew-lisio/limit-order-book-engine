@@ -11,7 +11,7 @@ class OrderBook {
     std::map<int, int> asks;
 
     public:
-    void addOrder(const Order& order);
+    bool addOrder(const Order& order);
     int getBestBid() const;
     int getBestAsk() const;
     bool cancelOrder(int orderId);

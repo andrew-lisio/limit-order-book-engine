@@ -1,6 +1,12 @@
 #include "OrderBook.h"
 
-void OrderBook::addOrder(const Order& order) {
+bool OrderBook::addOrder(const Order& order) {
+    auto it = orders.find(order.id);
+
+    if (it != orders.end()) {
+        return false;
+    }
+
     orders.insert_or_assign(order.id, order);
 
     if (order.side == Side::Buy) {
@@ -8,6 +14,9 @@ void OrderBook::addOrder(const Order& order) {
     } else {
         asks[order.price] += order.quantity;
     }
+
+    return true;
+    
 }
 
 int OrderBook::getBestBid() const {
